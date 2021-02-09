@@ -21,3 +21,76 @@ And finally, you have to start webpack like server with:
 
 # How to access to the carousel
 After making the install you have to open a web browser and go to http://localhost:3000/
+
+# How it works?
+
+I have developed a component called "Slider" which you can pass a json with all the elements to show in the carousel.
+
+This json is an array of items. We can have items where can make a reference to a video, audio, image or html/text.
+
+For items of audio the structure of it would be:
+
+    {
+      "tag": "audio",
+      "artist": "Creator of audio",
+      "title": "Title of audio",
+      "src": "url to the audio",
+      "type": "format of audio"
+    }
+
+For items of audio the structure of it would be:
+
+    {
+      "tag": "video",
+      "src": "url to the video",
+      "type": "format of video"
+    }
+
+For items of image the structure of it would be:
+
+    {
+      "tag" : "img",
+      "src" : "/assets/images/image15.jpg",
+      "class" : "fit-size"
+    }
+
+And, for items of html/text the structure of it would be:
+
+    {
+      "tag" : "text",
+      "src" : "HTML or text to include",
+      "class" : "fit-size"
+    }
+
+An example of a json with one element of each one would be:
+
+```javascript
+const list_elements = {
+  items: [
+    {
+      "tag": "audio",
+      "artist": "Charles Dickens",
+      "title": "Great Expectations - Chapter 1",
+      "src": "http://www.archive.org/download/great_expectations_mfs_0812_librivox/greatexpectations_01_dickens_64kb.mp3",
+      "type": "audio/mp3"
+    },
+    {
+      "tag": "video",
+      "artist": "Director: John S. Roberson",
+      "title" : " - Dr. Jeckyll and Mr. Hyde - With: John Barrymore",
+      "src" : "https://ia800309.us.archive.org/16/items/DrJekyllandMrHyde/DrJekyllandMrHyde_512kb.mp4",
+      "type" : "video/mp4"
+    },
+    {
+      "tag" : "img",
+      "src" : "/assets/images/image1.png",
+      "class" : "fit-size"
+    },
+    {
+      "tag" : "text",
+      "src" : "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget dignissim nunc, dapibus congue mi. Donec auctor eros orci, non semper lectus vulputate eget. Nunc at libero nisl. Ut id commodo quam.</p><p>Ut volutpat eros fringilla mi consequat, rutrum vehicula mi tristique. Aenean egestas mollis pretium.</p><p>Vestibulum et egestas libero. Integer sed quam quam. Cras cursus lorem id efficitur viverra. Mauris pretium nisl sed lectus fermentum pharetra.</p><p>Mauris massa velit, tincidunt nec justo eget, pellentesque hendrerit nisl. Integer nibh nisi, vehicula et aliquam vel, gravida eget sem. Nullam imperdiet dolor lorem, et commodo nisi interdum sed. Suspendisse gravida non velit sed sagittis.</p><p>In commodo massa sed lacus convallis, id placerat arcu blandit.</p>",
+      "class" : "fit-size"
+    },
+  ],
+};
+```

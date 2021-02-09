@@ -32,7 +32,6 @@ const list_elements = {
     {
       "tag" : "video",
       "src" : "/assets/videos/video1.mp4",
-      "class" : "fit-size",
       "type": "video/mp4"
     },
     {
@@ -62,7 +61,6 @@ const list_elements = {
     {
       "tag" : "video",
       "src" : "/assets/videos/video2.mp4",
-      "class" : "fit-size",
       "type": "video/mp4"
     },
     {
@@ -77,7 +75,6 @@ const list_elements = {
     {
       "tag" : "video",
       "src" : "/assets/videos/video1.mp4",
-      "class" : "fit-size",
       "type": "video/mp4"
     },
     {
@@ -92,7 +89,6 @@ const list_elements = {
     {
       "tag" : "video",
       "src" : "/assets/videos/video2.mp4",
-      "class" : "fit-size",
       "type": "video/mp4"
     },
     {
@@ -107,7 +103,6 @@ const list_elements = {
     {
       "tag" : "video",
       "src" : "/assets/videos/video1.mp4",
-      "class" : "fit-size",
       "type": "video/mp4"
     },
     {
@@ -123,7 +118,6 @@ const list_elements = {
     {
       "tag" : "video",
       "src" : "/assets/videos/video2.mp4",
-      "class" : "fit-size",
       "type": "video/mp4"
     },
     {
