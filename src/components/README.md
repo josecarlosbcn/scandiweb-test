@@ -21,4 +21,3 @@ And finally, you have to start webpack like server with:
 
 # How to access to the carousel
 After making the install you have to open a web browser and go to http://localhost:3000/
-
