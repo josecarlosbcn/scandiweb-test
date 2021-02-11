@@ -1,8 +1,18 @@
 import React from 'react';
-import Slider from "./components/slider";
+import {Slider} from "./components/slider";
 
 const list_elements = {
   items: [
+    {
+      "tag": "multi-picture",
+      "pictures": [
+        "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg",
+        "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg",
+        "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg",
+        "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg",
+        "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg"
+      ]
+    },
     {
       "tag": "audio",
       "artist": "Charles Dickens",
@@ -182,7 +192,8 @@ const list_elements = {
 function App() {
   return (
     <div>
-      <Slider list_elements = {list_elements} />
+      <h1>Carousel Scandiweb</h1>
+      <Slider list_elements = {list_elements} width = {800} height = {480} />
     </div>
   );
 }

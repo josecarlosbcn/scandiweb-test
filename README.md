@@ -1,7 +1,7 @@
 # Carousel Scandiweb
 This development is a test development for Scandiweb where we build a carousel which can get text, images, audio or video in each of his slides.
 
-# How to install
+# How to install?
 You have to clone or download the project from this url of github:
 
 https://github.com/josecarlosbcn/scandiweb-test.git
@@ -19,7 +19,7 @@ And finally, you have to start webpack like server with:
 
 **npm run start**
 
-# How to access to the carousel
+# How to access to the carousel?
 After making the install you have to open a web browser and go to http://localhost:3000/
 
 # How it works?
@@ -54,7 +54,7 @@ For items of image the structure of it would be:
       "class" : "fit-size"
     }
 
-And, for items of html/text the structure of it would be:
+For items of html/text the structure of it would be:
 
     {
       "tag" : "text",
@@ -62,11 +62,34 @@ And, for items of html/text the structure of it would be:
       "class" : "fit-size"
     }
 
+And, for items for Multi-picture the structure of it would be:
+
+    {
+      "tag": "multi-picture",
+      "pictures": [
+        "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg",
+        "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg",
+        "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg",
+        "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg",
+        "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg"
+      ]
+    },
+
 An example of a json with one element of each one would be:
 
 ```javascript
 const list_elements = {
   items: [
+    {
+      "tag": "multi-picture",
+      "pictures": [
+        "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg",
+        "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg",
+        "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg",
+        "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg",
+        "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg"
+      ]
+    },    
     {
       "tag": "audio",
       "artist": "Charles Dickens",
@@ -93,4 +116,16 @@ const list_elements = {
     },
   ],
 };
+```
+
+# How to use Slider component
+The use is very easy. Just only import "slider" to your file and call it. To call it, you have to inform three properties:
+
+* list_elements: Here you have to pass the json as previously describe.
+* width: Width of the Carousel in pixels
+* height: Height of the Carousel in pixels
+
+For example: 
+```javascript
+<Slider list_elements = {list_elements} width = {800} height = {480} />
 ```

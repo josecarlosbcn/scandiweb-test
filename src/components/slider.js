@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import "../css/styles.css";
 
 
-export default class Slider extends Component {
+class Slider extends Component {
     constructor(props){
         super(props);
         this.props = props;
@@ -21,25 +21,26 @@ export default class Slider extends Component {
         this.setState({
             loaded: true
         }, () => {
+            let container = document.querySelector(".container");            
+            container.style.maxWidth = this.props.width + "px";
+            container.style.maxHeight = this.props.height + "px";
             let slider = document.querySelector(".slider");
             let leftButton = document.querySelector("#l-button");
             let rightButton = document.querySelector("#r-button");
             this.createElementsOfSlider(slider);
             slider.addEventListener("mousedown", (e) => {
-                console.log(e);
                 e.stopPropagation();
                 this.setState({
                     x_start: e.x
                 });
-                console.log("x inicio: " + this.state.x_start);
             });    
             slider.addEventListener("mouseup", (e) => {
                 this.setState({
                     x_swipe: e.x - this.state.x_start
                 });
                 console.log("x_swipe: " + this.state.x_swipe);
-                if (this.state.x_swipe < -125) this.swipeToLeft();
-                if (this.state.x_swipe > 125) this.swipeToRight();
+                if (this.state.x_swipe < -125) this.moveToLeft();
+                if (this.state.x_swipe > 125) this.moveToRight();
             });
             slider.addEventListener("touchstart", (e) => {
                 this.setState({
@@ -62,8 +63,8 @@ export default class Slider extends Component {
                 }
             });
             slider.addEventListener("touchend", (e) => {
-                if (this.state.x_swipe < -125) this.swipeToLeft();
-                if (this.state.x_swipe > 125) this.swipeToRight();
+                if (this.state.x_swipe < -125) this.moveToLeft();
+                if (this.state.x_swipe > 125) this.moveToRight();
                 if (this.state.x_swipe >= -125 && this.state.x_swipe <= 125){
                     let slider = document.querySelector(".slider");
                     slider.style.transition = "all 0.1s ease-in-out";
@@ -104,7 +105,7 @@ export default class Slider extends Component {
             });
         });          
         videoTag.style.width = 100 + "%";
-        videoTag.style.height = 100 + "%";
+        videoTag.style.height = this.props.height + "px";
         videoTag.controls = true;
         source.src = list_elements.items[index].src;
         if (typeof list_elements.items[index].type !== "undefined")
@@ -182,6 +183,65 @@ export default class Slider extends Component {
     }
 
     /**
+     * Create Multi Picture slide
+     * 
+     * @param {*} index 
+     */
+    createMultiPicture(index){
+        let multiPicture = document.createElement("div");
+        let list_elements = this.props.list_elements;
+        //multiPicture.className = "multi-picture";
+        multiPicture.style.display = "grid";
+        multiPicture.style.height = "inherit";
+        if (list_elements.items[index].pictures.length === 2){
+            multiPicture.style.gridTemplateColumns = "repeat(2, 50%)";
+            multiPicture.style.gridTemplateRows = "100%";
+            for (let j = 0; j < list_elements.items[index].pictures.length; j++){
+                let div2 = document.createElement("div");
+                div2.style.maxHeight = 100 + "%";
+                let image = document.createElement("img");
+                image.src = list_elements.items[index].pictures[j];
+                image.className = "image";
+                div2.appendChild(image);
+                multiPicture.appendChild(div2);
+            }
+        }
+        if (list_elements.items[index].pictures.length === 3){
+            multiPicture.style.gridTemplateColumns = "repeat(3, 33.3%)";
+            multiPicture.style.gridTemplateRows = "100%";
+            for (let j = 0; j < list_elements.items[index].pictures.length; j++){
+                let div2 = document.createElement("div");
+                div2.style.maxHeight = 100 + "%";
+                let image = document.createElement("img");
+                image.src = list_elements.items[index].pictures[j];
+                image.className = "image";
+                div2.appendChild(image);
+                multiPicture.appendChild(div2);
+            }
+        }
+        if (list_elements.items[index].pictures.length >= 4){
+            let length = list_elements.items[index].pictures.length;
+            multiPicture.style.gridTemplateColumns = "repeat(" + Math.ceil(Math.sqrt(length)) + ", "  + (100/Math.ceil(Math.sqrt(length))) + "%)";
+            multiPicture.style.gridTemplateRows = "repeat(" + Math.ceil(Math.sqrt(length)) + ", "  + (100/Math.ceil(Math.sqrt(length))) + "%)";
+            for (let j = 0; j < list_elements.items[index].pictures.length; j++){
+                let div2 = document.createElement("div");
+                if (list_elements.items[index].pictures[j].length > 0){
+                    let image = document.createElement("img");
+                    image.src = list_elements.items[index].pictures[j];
+                    image.className = "image";
+                    div2.appendChild(image);    
+                }else{
+                    div2.style.backgroundColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+                }
+                div2.style.maxHeight = 100 + "%";
+                multiPicture.appendChild(div2);
+            }
+        }        
+
+        return multiPicture;
+    }
+
+    /**
      * We create all the slides of the carrousel
      * @param {*} slider 
      */
@@ -192,7 +252,7 @@ export default class Slider extends Component {
         for (let i = 0; i < list_elements.items.length; i++) {
             let div = document.createElement("div");
             div.id = "slide" + i;
-            div.className = "slider-content";
+            //div.className = "slider-content";
             //div.style.backgroundColor = "#" + Math.floor(Math.random()*16777215).toString(16);
             div.style.margin = 0;
             div.style.padding = 0;
@@ -201,6 +261,7 @@ export default class Slider extends Component {
             div.style.fontFamily = "Verdana";
             div.style.fontWeight = "bold";
             div.style.width = 100 + "%";
+            div.style.height = "inherit";
             //Creating element inside div
             if (list_elements.items[i].tag === "text"){
                 div.innerHTML = list_elements.items[i].src;
@@ -221,6 +282,10 @@ export default class Slider extends Component {
             if (list_elements.items[i].tag === "img"){
                 let imageTag = this.createImageTag(i);
                 div.append(imageTag);
+            }
+             if (list_elements.items[i].tag === "multi-picture"){
+                let multiPicture = this.createMultiPicture(i);
+                div.appendChild(multiPicture);
             }
             slider.appendChild(div);
         }  
@@ -314,18 +379,9 @@ export default class Slider extends Component {
         }        
     }
 
-    swipeToLeft(){
-        this.moveToLeft();
-    }
-
-    swipeToRight(){
-        this.moveToRight();
-    }
-
     render(){
         return(
-            <div>
-                <h1>Slider Scandiweb</h1> 
+            <div>                
                 {
                     (this.state.loaded) ?
                         <div>
@@ -334,12 +390,12 @@ export default class Slider extends Component {
                                 </div>
                                 <div className = "slider-button" id = "l-button" style = {{display: (this.state.slide > 0) ? "block" : "none"}}>&#60;</div>
                                 <div className = "slider-button" id = "r-button" style = {{display: (this.state.slide < this.props.list_elements.items.length - 1) ? "block" : "none"}}>&#62;</div>
-                                <div>Hola!!</div>
                             </div>
                             <div className = "error"></div>
                             <div className = "selector">
-                                Go to slide <input id = "selector" type = "text" placeholder = "Press enter to go ... " onKeyDown = {this.goTo} /> of {this.props.list_elements.items.length}
-                            </div>                
+                                <div style = {{marginBottom: 5 + "px"}}>Slide: {this.state.slide + 1} / {this.props.list_elements.items.length}</div>
+                                <div>Go to slide <input id = "selector" type = "text" placeholder = "Press enter to go ... " onKeyDown = {this.goTo} /> of {this.props.list_elements.items.length}</div>
+                            </div>                                            
                         </div>
                     :
                     <h1>Loading data ...</h1>
@@ -349,4 +405,4 @@ export default class Slider extends Component {
     }
 }
 
-//module.exports.Slider = Slider;
+module.exports.Slider = Slider;
