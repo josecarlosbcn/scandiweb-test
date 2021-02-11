@@ -10,7 +10,8 @@ const list_elements = {
         "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg",
         "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg",
         "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg",
-        "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg"
+        "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg",
+        "/assets/images/image15.jpg", "/assets/images/image16.jpeg", "/assets/images/image16.jpeg", "/assets/images/image15.jpg",
       ]
     },
     {

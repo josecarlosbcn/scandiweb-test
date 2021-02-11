@@ -261,7 +261,7 @@ class Slider extends Component {
             div.style.fontFamily = "Verdana";
             div.style.fontWeight = "bold";
             div.style.width = 100 + "%";
-            div.style.height = "inherit";
+            div.style.height = this.props.height + "px";
             //Creating element inside div
             if (list_elements.items[i].tag === "text"){
                 div.innerHTML = list_elements.items[i].src;
