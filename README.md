@@ -127,5 +127,8 @@ The use is very easy. Just only import "slider" to your file and call it. To cal
 
 For example: 
 ```javascript
+import {Slider} from "./components/slider";
+
+
 <Slider list_elements = {list_elements} width = {800} height = {480} />
 ```
